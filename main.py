@@ -6,6 +6,7 @@ from game.connector import RemotePlayerConnector, LocalRandomPlayerConnector
 from game.display import TerminalTicTacToeGameDisplay
 from game.models import Player, GameType
 from game.simulator import GameSimulator
+from game.utils import is_valid_url
 
 logging.basicConfig(
     level=logging.INFO,
@@ -29,6 +30,8 @@ def create_parser() -> argparse.ArgumentParser:
                         choices=["remote", "local"], default="local")
     parser.add_argument("-l", "--log-level", help="Logging level. Default: 'info'",
                         choices=["debug", "info", "warn", "error"], default="info")
+    parser.add_argument("-r", "--remote-url", help="Uri for remote host simulation mode",
+                        type=str, required=False)
     return parser
 
 
@@ -49,7 +52,9 @@ def main(argv: list[str] | None = None) -> None:
     mode = args.mode
 
     if mode == "remote":
-        connector = RemotePlayerConnector()
+        if not is_valid_url(args.remote_url):
+            parser.error("remote_url is not valid URL")
+        connector = RemotePlayerConnector(args.remote_url)
     else:
         connector = LocalRandomPlayerConnector()
 

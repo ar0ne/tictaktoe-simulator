@@ -41,10 +41,6 @@ class GameSimulator:
     def _simulate_game(self) -> None:
         logger.info("Simulation in progress")
         while self.game.is_running():
-            move = self._get_next_player_move(self.game)
-            if self.game.validate_move(move):
-                self.game.apply_move(move)
-
-    def _get_next_player_move(self, game: IGameEngine) -> PlayerMove:
-        # request move from Player
-        return self.connector.get_next_move(game)
+            if move := self.connector.get_next_move(self.game):
+                if self.game.validate_move(move):
+                    self.game.apply_move(move)
