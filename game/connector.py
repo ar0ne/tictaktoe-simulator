@@ -34,6 +34,6 @@ class RemotePlayerConnector:
             with httpx.Client() as client:
                 r = client.get(self.remote_url)
                 r.raise_for_status()
-                return PlayerMove(game.active_player, r.json()['turn'])
+                return PlayerMove(game.active_player, int(r.text))
         except httpx.HTTPError as exc:
             logger.warning("Unable to retrieve player's move (%s): %s", self.remote_url, exc)

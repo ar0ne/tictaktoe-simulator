@@ -13,3 +13,6 @@ dev = [
     "mypy>=2.1.0",
     "pytest>=9.1.0",
 ]
+demo = [
+    "aiohttp>=3.14.1",
+]
