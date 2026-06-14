@@ -9,14 +9,14 @@ def all_present(col: Sequence[Any]) -> bool:
     )
 
 
-def all_equal(col: Sequence[Any]) -> bool:
+def all_equal(col: Sequence[Any], value: Any) -> bool:
     if not col or len(col) < 1:
-        raise ValueError("Collection can't be emply")
+        raise ValueError("Collection can't be empty")
     return all(
-        True if el == col[0] else False
+        el == value
         for el in col
     )
 
 
-def all_present_and_equal(col: Sequence[Any]) -> bool:
-    return all_present(col) and all_equal(col)
+def all_present_and_equal(col: Sequence[Any], value: Any) -> bool:
+    return all_present(col) and all_equal(col, value)
