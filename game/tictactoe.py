@@ -1,3 +1,4 @@
+import logging
 import random
 from typing import Literal, Sequence, cast
 
@@ -5,6 +6,8 @@ from game.models import Player, PlayerMove, GameType
 from game.utils import all_present_and_equal, all_present
 
 type PlayerValue = Literal["x", "o"]
+
+logger = logging.getLogger(__name__)
 
 
 class TicTacToe:
@@ -46,14 +49,11 @@ class TicTacToe:
             self.is_player_won(self.ZERO)
         )) and not all_present(self.board)
 
-    @property
-    def active_player(self) -> Player:
-        return self.current_player
-
     def start(self) -> None:
         """
         Init new game round.
         """
+        logger.debug("Initialize TicTacToe game engine")
         self.board = [None for _ in range(9)]
         self.current_player = random.choice((self.cross_player, self.zero_player))
 
@@ -74,6 +74,7 @@ class TicTacToe:
 
     def apply_move(self, move: PlayerMove) -> None:
         """Applies game move"""
+        logger.debug("Applying game move %s", move)
         cell_idx: int = cast(int, move.data)
         self.board[cell_idx] = self.CROSS if self.cross_player == move.player else self.ZERO
         self._toggle_active_player()
@@ -97,9 +98,6 @@ class TicTacToe:
             info += "-" * 13
         return info
 
-    def get_game_type(self) -> GameType:
-        return GameType.TICTACTOE
-
     def _get_game_info_title(self) -> str:
         if self.is_running():
             return "Game is in progress!"
@@ -107,7 +105,7 @@ class TicTacToe:
             return f"Cross (x) player '{self.cross_player.name}' won"
         elif self.is_player_won(self.ZERO):
             return f"Zero (o) player '{self.zero_player.name}' won"
-        return "DRAFT"
+        return "Draft"
 
     def _toggle_active_player(self) -> None:
         self.current_player = (
@@ -115,3 +113,11 @@ class TicTacToe:
             if self.active_player == self.cross_player
             else self.cross_player
         )
+
+    @property
+    def active_player(self) -> Player:
+        return self.current_player
+
+    @property
+    def game_type(self) -> GameType:
+        return GameType.TICTACTOE

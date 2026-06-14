@@ -7,10 +7,6 @@ from game.models import PlayerMove, Player, GameType
 
 class IGameEngine(Protocol):
 
-    @property
-    def active_player(self) -> Player:
-        ...
-
     def __init__(self, players: Sequence[Player]) -> None:
         ...
 
@@ -29,5 +25,10 @@ class IGameEngine(Protocol):
     def get_game_info(self) -> str:
         ...
 
-    def get_game_type(self) -> GameType:
+    @property
+    def active_player(self) -> Player:
+        ...
+
+    @property
+    def game_type(self) -> GameType:
         ...

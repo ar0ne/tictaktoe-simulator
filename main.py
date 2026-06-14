@@ -3,7 +3,7 @@ CLI
 parse args
 remote random generator
 """
-from game.connectors import LocalRandomPlayerConnector
+from game.connector import LocalRandomPlayerConnector
 from game.manager import GameManager
 from game.models import Player, GameType
 
@@ -11,10 +11,10 @@ from game.models import Player, GameType
 def local_use_case():
     players = [Player("John"), Player("Bob")]
     manager = GameManager(connector=LocalRandomPlayerConnector())
-    game = manager.create_game(GameType.TICTACTOE, players)
-    game.start()
-    manager.play(game)
-    manager.display_results(game)
+    engine = manager.create_engine(GameType.TICTACTOE, players)
+    manager.start(engine)
+    manager.play(engine)
+    manager.display_game_results(engine)
 
 
 def main():
