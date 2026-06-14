@@ -1,9 +1,18 @@
-from abc import ABC
+from typing import Sequence
+
+from mypy.semanal_shared import Protocol
 
 from game.models import PlayerMove, Player, GameType
 
 
-class GameEngine(ABC):
+class IGameEngine(Protocol):
+
+    @property
+    def active_player(self) -> Player:
+        ...
+
+    def __init__(self, players: Sequence[Player]) -> None:
+        ...
 
     def start(self) -> None:
         ...
@@ -15,9 +24,6 @@ class GameEngine(ABC):
         ...
 
     def is_running(self) -> bool:
-        ...
-
-    def get_active_player(self) -> Player:
         ...
 
     def get_game_info(self) -> str:

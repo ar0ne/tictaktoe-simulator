@@ -10,7 +10,7 @@ from game.models import Player, GameType
 
 def local_use_case():
     players = [Player("John"), Player("Bob")]
-    manager = GameManager(player_connector=LocalRandomPlayerConnector())
+    manager = GameManager(connector=LocalRandomPlayerConnector())
     game = manager.create_game(GameType.TICTACTOE, players)
     game.start()
     manager.play(game)
