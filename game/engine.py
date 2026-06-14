@@ -22,9 +22,6 @@ class IGameEngine(Protocol):
     def is_running(self) -> bool:
         ...
 
-    def get_game_info(self) -> str:
-        ...
-
     @property
     def active_player(self) -> Player:
         ...

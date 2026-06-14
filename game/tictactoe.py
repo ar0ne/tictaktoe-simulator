@@ -40,15 +40,6 @@ class TicTacToe:
             all_present_and_equal((self.board[2], self.board[5], self.board[8]), player_value),
         ))
 
-    def is_running(self) -> bool:
-        """
-        Checks if any player win or all cells filled.
-        """
-        return not any((
-            self.is_player_won(self.CROSS),
-            self.is_player_won(self.ZERO)
-        )) and not all_present(self.board)
-
     def start(self) -> None:
         """
         Init new game round.
@@ -79,33 +70,14 @@ class TicTacToe:
         self.board[cell_idx] = self.CROSS if self.cross_player == move.player else self.ZERO
         self._toggle_active_player()
 
-    def get_game_info(self) -> str:
-        def fmt_cell(val: PlayerValue | None) -> str:
-            if val is None:
-                return " "
-            return val
-
-        info = self._get_game_info_title()
-        info += "\n"
-        info += "-" * 13
-        for line_idx in range(3):
-            info += "\n"
-            info += (
-                f"| {fmt_cell(self.board[line_idx * 3])} "
-                f"| {fmt_cell(self.board[1 + line_idx * 3])} "
-                f"| {fmt_cell(self.board[2 + line_idx * 3])} |\n"
-            )
-            info += "-" * 13
-        return info
-
-    def _get_game_info_title(self) -> str:
-        if self.is_running():
-            return "Game is in progress!"
-        if self.is_player_won(self.CROSS):
-            return f"Cross (x) player '{self.cross_player.name}' won"
-        elif self.is_player_won(self.ZERO):
-            return f"Zero (o) player '{self.zero_player.name}' won"
-        return "Draft"
+    def is_running(self) -> bool:
+        """
+        Checks if any player win or all cells filled.
+        """
+        return not any((
+            self.is_player_won(self.CROSS),
+            self.is_player_won(self.ZERO)
+        )) and not all_present(self.board)
 
     def _toggle_active_player(self) -> None:
         self.current_player = (
