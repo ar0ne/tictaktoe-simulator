@@ -1,5 +1,22 @@
 import argparse
 
+from game.domain.entities import SimulationMode
+from game.infrastructure.domain.config import Config
+from game.infrastructure.domain.log import LogLevel
+
+
+def read_config(argv: list[str] | None, parser: argparse.ArgumentParser) -> Config:
+    args = parser.parse_args(argv)
+
+    config = Config(
+        player1=args.player1,
+        player2=args.player2,
+        mode=SimulationMode(args.mode),
+        log_level=LogLevel(args.log_level),
+        remote_url=args.remote_url,
+    )
+    return config
+
 
 def create_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
