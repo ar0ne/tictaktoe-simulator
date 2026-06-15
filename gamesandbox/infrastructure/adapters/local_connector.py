@@ -1,8 +1,8 @@
 import random
 
-from game.application.ports.engine import IGameEngine
-from game.application.ports.logger import ILogger
-from game.domain.entities import PlayerMove, GameType
+from gamesandbox.application.ports.engine import IGameEngine
+from gamesandbox.application.ports.logger import ILogger
+from gamesandbox.domain.entities import PlayerMove, GameType
 
 
 class LocalRandomPlayerConnector:

@@ -1,8 +1,8 @@
 import argparse
 
-from game.domain.entities import SimulationMode, GameType
-from game.infrastructure.domain.config import Config
-from game.infrastructure.domain.log import LogLevel
+from gamesandbox.domain.entities import SimulationMode, GameType
+from gamesandbox.infrastructure.domain.config import Config
+from gamesandbox.infrastructure.domain.log import LogLevel
 
 
 def read_config(argv: list[str] | None, parser: argparse.ArgumentParser) -> Config:

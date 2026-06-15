@@ -3,7 +3,7 @@ from typing import Protocol
 
 class IGameSimulator(Protocol):
     """
-    Interface for game simulations
+    Interface for gamesandbox simulations
     """
 
     def run_simulation(self) -> None:

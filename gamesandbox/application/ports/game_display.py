@@ -1,11 +1,11 @@
 from typing import Protocol
 
-from game.application.ports.engine import IGameEngine
+from gamesandbox.application.ports.engine import IGameEngine
 
 
 class IGameDisplay(Protocol):
     """
-    Interface of game state display
+    Interface of gamesandbox state display
     """
 
     def display(self, game_engine: IGameEngine) -> str:

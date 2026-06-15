@@ -1,18 +1,18 @@
 from typing import Type
 
-from game.application.ports.engine import IGameEngine
-from game.application.ports.game_display import IGameDisplay
-from game.application.ports.game_simulator import IGameSimulator
-from game.application.ports.logger import ILogger
-from game.application.ports.player_connector import IPlayerConnector
-from game.application.usecases.game_simulator import GameSimulator
-from game.application.usecases.tictactoe_game_display import TerminalTicTacToeGameDisplay
-from game.application.usecases.tictactoe_game_engine import TicTacToeGameEngine
-from game.domain.entities import Player, GameType, SimulationMode
-from game.infrastructure.adapters.local_connector import LocalRandomPlayerConnector
-from game.infrastructure.adapters.logger import create_logger
-from game.infrastructure.adapters.remote_connector import RemotePlayerConnector
-from game.infrastructure.domain.config import Config
+from gamesandbox.application.ports.engine import IGameEngine
+from gamesandbox.application.ports.game_display import IGameDisplay
+from gamesandbox.application.ports.game_simulator import IGameSimulator
+from gamesandbox.application.ports.logger import ILogger
+from gamesandbox.application.ports.player_connector import IPlayerConnector
+from gamesandbox.application.usecases.game_simulator import GameSimulator
+from gamesandbox.application.usecases.tictactoe_game_display import TerminalTicTacToeGameDisplay
+from gamesandbox.application.usecases.tictactoe_game_engine import TicTacToeGameEngine
+from gamesandbox.domain.entities import Player, GameType, SimulationMode
+from gamesandbox.infrastructure.adapters.local_connector import LocalRandomPlayerConnector
+from gamesandbox.infrastructure.adapters.logger import create_logger
+from gamesandbox.infrastructure.adapters.remote_connector import RemotePlayerConnector
+from gamesandbox.infrastructure.domain.config import Config
 
 SUPPORTED_GAMES: dict[GameType, Type[IGameEngine]] = {
     GameType.TICTACTOE: TicTacToeGameEngine,

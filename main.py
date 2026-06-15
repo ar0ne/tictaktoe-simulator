@@ -1,7 +1,7 @@
 import sys
 
-from game.infrastructure.adapters.cli import create_parser, read_config
-from game.infrastructure.di import Container
+from gamesandbox.infrastructure.adapters.cli import create_parser, read_config
+from gamesandbox.infrastructure.di import Container
 
 
 def main(argv: list[str] | None = None) -> None:

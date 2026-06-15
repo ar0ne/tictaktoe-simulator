@@ -1,7 +1,7 @@
-from game.application.ports.engine import IGameEngine
-from game.application.ports.game_display import IGameDisplay
-from game.application.ports.logger import ILogger
-from game.application.ports.player_connector import IPlayerConnector
+from gamesandbox.application.ports.engine import IGameEngine
+from gamesandbox.application.ports.game_display import IGameDisplay
+from gamesandbox.application.ports.logger import ILogger
+from gamesandbox.application.ports.player_connector import IPlayerConnector
 
 
 class GameSimulator:
@@ -23,7 +23,7 @@ class GameSimulator:
         self._logger.info(state)
 
     def _init_game(self) -> None:
-        self._logger.info("Initialize game: %s", self._game_engine.game_type.name)
+        self._logger.info("Initialize gamesandbox: %s", self._game_engine.game_type.name)
         self._game_engine.start()
 
     def _simulate_game(self) -> None:

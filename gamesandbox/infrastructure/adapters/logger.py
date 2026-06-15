@@ -1,8 +1,8 @@
 import logging
 
-from game.application.ports.logger import ILogger
-from game.application.usecases.simple_logger import SimpleLogger
-from game.infrastructure.domain.log import LogLevel
+from gamesandbox.application.ports.logger import ILogger
+from gamesandbox.application.usecases.simple_logger import SimpleLogger
+from gamesandbox.infrastructure.domain.log import LogLevel
 
 LOG_LEVELS_MAP: dict[LogLevel, int] = {
     LogLevel.debug: logging.DEBUG,

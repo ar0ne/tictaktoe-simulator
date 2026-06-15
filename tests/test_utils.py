@@ -1,6 +1,6 @@
 import pytest
 
-from game.utils.common import all_present, all_equal, all_present_and_equal
+from gamesandbox.utils.common import all_present, all_equal, all_present_and_equal
 
 
 @pytest.mark.parametrize("collection, expected", [

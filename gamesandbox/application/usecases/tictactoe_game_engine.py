@@ -1,7 +1,7 @@
 from typing import Literal, Sequence, cast
 
-from game.domain.entities import Player, PlayerMove, GameType
-from game.utils.common import all_present_and_equal, all_present
+from gamesandbox.domain.entities import Player, PlayerMove, GameType
+from gamesandbox.utils.common import all_present_and_equal, all_present
 
 type PlayerValue = Literal["x", "o"]
 

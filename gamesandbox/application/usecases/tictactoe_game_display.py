@@ -1,15 +1,15 @@
-from game.application.ports.engine import IGameEngine
-from game.application.usecases.tictactoe_game_engine import TicTacToeGameEngine, PlayerValue
+from gamesandbox.application.ports.engine import IGameEngine
+from gamesandbox.application.usecases.tictactoe_game_engine import TicTacToeGameEngine, PlayerValue
 
 
 class TerminalTicTacToeGameDisplay:
-    """Implementation of IGameDisplay interface for TicTacToe game engine.
-    Can send state of the game to the logger"""
+    """Implementation of IGameDisplay interface for TicTacToe gamesandbox engine.
+    Can send state of the gamesandbox to the logger"""
 
     def display(self, game_engine: IGameEngine) -> str:
         """Print display state in stdout"""
         if not isinstance(game_engine, TicTacToeGameEngine):
-            raise ValueError("Unsupported game engine to display")
+            raise ValueError("Unsupported gamesandbox engine to display")
         return self._get_game_info(game_engine)
 
     def _get_game_info(self, game_engine: TicTacToeGameEngine) -> str:

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from game.domain.entities import SimulationMode, GameType
-from game.infrastructure.domain.log import LogLevel
-from game.utils.common import is_valid_url
+from gamesandbox.domain.entities import SimulationMode, GameType
+from gamesandbox.infrastructure.domain.log import LogLevel
+from gamesandbox.utils.common import is_valid_url
 
 
 @dataclass
