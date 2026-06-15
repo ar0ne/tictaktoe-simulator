@@ -1,5 +1,8 @@
 from gamesandbox.application.ports.engine import IGameEngine
-from gamesandbox.application.usecases.tictactoe_game_engine import TicTacToeGameEngine, PlayerValue
+from gamesandbox.application.usecases.tictactoe_game_engine import (
+    TicTacToeGameEngine,
+    PlayerValue,
+)
 
 
 class TerminalTicTacToeGameDisplay:

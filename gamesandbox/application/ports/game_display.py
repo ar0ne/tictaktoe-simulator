@@ -8,5 +8,4 @@ class IGameDisplay(Protocol):
     Interface of gamesandbox state display
     """
 
-    def display(self, game_engine: IGameEngine) -> str:
-        ...
+    def display(self, game_engine: IGameEngine) -> str: ...

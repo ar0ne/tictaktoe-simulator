@@ -9,6 +9,7 @@ To run demo simulation:
 >>> uv run server.py
 ======== Running on http://0.0.0.0:8080 ========
 """
+
 import random
 
 from aiohttp import web

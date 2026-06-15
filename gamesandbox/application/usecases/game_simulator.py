@@ -5,8 +5,15 @@ from gamesandbox.application.ports.player_connector import IPlayerConnector
 
 
 class GameSimulator:
-    def __init__(self, /, *, connector: IPlayerConnector, game_engine: IGameEngine,
-                 logger: ILogger, game_display: IGameDisplay) -> None:
+    def __init__(
+        self,
+        /,
+        *,
+        connector: IPlayerConnector,
+        game_engine: IGameEngine,
+        logger: ILogger,
+        game_display: IGameDisplay,
+    ) -> None:
         self._logger = logger
         self._connector = connector
         self._game_engine = game_engine
@@ -23,7 +30,9 @@ class GameSimulator:
         self._logger.info(state)
 
     def _init_game(self) -> None:
-        self._logger.info("Initialize gamesandbox: %s", self._game_engine.game_type.name)
+        self._logger.info(
+            "Initialize gamesandbox: %s", self._game_engine.game_type.name
+        )
         self._game_engine.start()
 
     def _simulate_game(self) -> None:

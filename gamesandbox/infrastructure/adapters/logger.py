@@ -18,7 +18,7 @@ def create_logger(log_level: LogLevel | None) -> ILogger:
         format="%(asctime)s [%(levelname)s] %(message)s",
         handlers=[
             logging.StreamHandler(),
-        ]
+        ],
     )
 
     root = logging.getLogger()

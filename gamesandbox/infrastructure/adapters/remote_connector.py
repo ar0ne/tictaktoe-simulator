@@ -22,5 +22,7 @@ class RemotePlayerConnector:
                 r.raise_for_status()
                 return PlayerMove(game.active_player, int(r.text))
         except httpx.HTTPError as exc:
-            self._logger.warning("Unable to retrieve player's move (%s): %s", self._remote_url, exc)
+            self._logger.warning(
+                "Unable to retrieve player's move (%s): %s", self._remote_url, exc
+            )
             return None

@@ -5,6 +5,4 @@ from gamesandbox.domain.entities import PlayerMove
 
 
 class IPlayerConnector(Protocol):
-
-    def get_next_move(self, game: IGameEngine) -> PlayerMove | None:
-        ...
+    def get_next_move(self, game: IGameEngine) -> PlayerMove | None: ...
