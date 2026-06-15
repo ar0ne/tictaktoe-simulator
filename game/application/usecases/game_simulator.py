@@ -1,12 +1,12 @@
-import logging
 from typing import Type, Sequence
 
+from game.application.ports.game_display import IGameDisplay
+from game.application.ports.logger import ILogger
 from game.application.ports.player_connector import IPlayerConnector
 from game.application.ports.engine import IGameEngine
 from game.application.usecases.tictactoe_game_engine import TicTacToeGameEngine
 from game.domain.entities import GameType, Player
 
-logger = logging.getLogger(__name__)
 
 
 class GameSimulator:
@@ -14,18 +14,24 @@ class GameSimulator:
         GameType.TICTACTOE: TicTacToeGameEngine,
     }
 
-    def __init__(self, /, *, connector: IPlayerConnector, game_type: GameType, players: Sequence[Player]) -> None:
-        self.connector = connector
-        self.game_engine = self._create_engine(game_type, players)
+    def __init__(self, /, *, connector: IPlayerConnector, game_type: GameType, players: Sequence[Player],
+                 logger: ILogger, game_display: IGameDisplay) -> None:
+        self._logger = logger
+        self._connector = connector
+        self._game_engine = self._create_engine(game_type, players)
+        self._game_display = game_display
 
     def run_simulation(self) -> None:
-        logger.info("Running simulation...")
+        self._logger.info("Running simulation...")
         self._init_game()
         self._simulate_game()
-        logger.info("Simulation completed")
+        self._logger.info("Simulation completed")
+
+    def display_state(self) -> None:
+        self._game_display.display(self._game_engine)
 
     def _create_engine(self, game_type: GameType, players: Sequence[Player]) -> IGameEngine:
-        logger.debug("Create display %s for players %s", game_type, players)
+        self._logger.debug("Create display %s for players %s", game_type, players)
         if game_type not in self.SUPPORTED_GAMES:
             raise ValueError(f"Game {game_type} is not supported")
         game = self.SUPPORTED_GAMES.get(game_type)
@@ -35,12 +41,12 @@ class GameSimulator:
         return game(randomized_players)
 
     def _init_game(self) -> None:
-        logger.info("Init the display %s", self.game_engine.game_type.name)
-        self.game_engine.start()
+        self._logger.info("Init the display %s", self._game_engine.game_type.name)
+        self._game_engine.start()
 
     def _simulate_game(self) -> None:
-        logger.info("Simulation in progress")
-        while self.game_engine.is_running():
-            if move := self.connector.get_next_move(self.game_engine):
-                if self.game_engine.validate_move(move):
-                    self.game_engine.apply_move(move)
+        self._logger.info("Simulation in progress")
+        while self._game_engine.is_running():
+            if move := self._connector.get_next_move(self._game_engine):
+                if self._game_engine.validate_move(move):
+                    self._game_engine.apply_move(move)
