@@ -1,13 +1,14 @@
-from functools import reduce
-from typing import Sequence, Any
+from itertools import chain
+from itertools import chain
+from typing import Iterable
 
 import pytest
 
 from gamesandbox.domain.entities import PlayerMove, GameType
 
 
-def flatten(lst: Sequence[Any]) -> list[Any]:
-    return list(reduce(lambda acc, i: acc + i, lst))
+def flatten[I](lst: list[Iterable[I]]) -> list[I]:
+    return list(chain.from_iterable(lst))
 
 
 def test_start(tictactoe_draft, alice, bob):
