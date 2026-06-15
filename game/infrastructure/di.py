@@ -22,9 +22,10 @@ class Container:
         return list({p1, p2})
 
     def player_connector(self) -> IPlayerConnector:
+        logger = self.logger()
         if self._config.mode == SimulationMode.REMOTE and self._config.remote_url:
-            return RemotePlayerConnector(self._config.remote_url)
-        return LocalRandomPlayerConnector()
+            return RemotePlayerConnector(self._config.remote_url, logger)
+        return LocalRandomPlayerConnector(logger)
 
     def game_type(self) -> GameType:
         return GameType.TICTACTOE

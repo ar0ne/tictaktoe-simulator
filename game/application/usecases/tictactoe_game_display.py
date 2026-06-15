@@ -3,6 +3,8 @@ from game.application.usecases.tictactoe_game_engine import TicTacToeGameEngine,
 
 
 class TerminalTicTacToeGameDisplay:
+    """Implementation of IGameDisplay interface for TicTacToe game engine.
+    Can send state of the game to the logger"""
 
     def __init__(self, logger: ILogger) -> None:
         self._logger = logger
@@ -17,15 +19,14 @@ class TerminalTicTacToeGameDisplay:
                 return " "
             return val
 
-        info = self._get_game_info_title(game)
-        info += "\n"
+        info = self._get_game_info_title(game) + "\n"
         info += "-" * 13
         for line_idx in range(3):
             info += "\n"
             info += (
-                f"| {fmt_cell(game.board[line_idx * 3])} "
-                f"| {fmt_cell(game.board[1 + line_idx * 3])} "
-                f"| {fmt_cell(game.board[2 + line_idx * 3])} |\n"
+                f"| {fmt_cell(game._board[line_idx * 3])} "
+                f"| {fmt_cell(game._board[1 + line_idx * 3])} "
+                f"| {fmt_cell(game._board[2 + line_idx * 3])} |\n"
             )
             info += "-" * 13
         return info
@@ -34,7 +35,7 @@ class TerminalTicTacToeGameDisplay:
         if game.is_running():
             return "Game is in progress!"
         if game.is_player_won(TicTacToeGameEngine.CROSS):
-            return f"Cross (x) player '{game.cross_player.name}' won"
+            return f"Cross (x) player '{game._cross_player.name}' won"
         elif game.is_player_won(TicTacToeGameEngine.ZERO):
-            return f"Zero (o) player '{game.zero_player.name}' won"
+            return f"Zero (o) player '{game._zero_player.name}' won"
         return "Draft"

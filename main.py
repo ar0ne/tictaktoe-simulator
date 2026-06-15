@@ -4,7 +4,8 @@ from argparse import ArgumentParser
 from game.domain.entities import SimulationMode
 from game.infrastructure.adapters.cli import create_parser
 from game.infrastructure.di import Container
-from game.infrastructure.domain.config import Config, LogLevel
+from game.infrastructure.domain.config import Config
+from game.infrastructure.domain.log import LogLevel
 
 
 def read_config(argv: list[str] | None, parser: ArgumentParser) -> Config:

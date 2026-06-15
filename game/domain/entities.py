@@ -11,6 +11,7 @@ class SimulationMode(enum.Enum):
     REMOTE = "remote"
     LOCAL = "local"
 
+
 @dataclass
 class Player:
     name: str

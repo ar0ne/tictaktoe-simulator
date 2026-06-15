@@ -1,15 +1,8 @@
-import enum
 from dataclasses import dataclass
 
 from game.domain.entities import SimulationMode
+from game.infrastructure.domain.log import LogLevel
 from game.utils.common import is_valid_url
-
-
-class LogLevel(enum.Enum):
-    debug = "debug"
-    info = "info"
-    warning = "warning"
-    error = "error"
 
 
 @dataclass

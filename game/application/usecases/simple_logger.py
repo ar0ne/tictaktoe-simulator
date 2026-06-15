@@ -3,6 +3,9 @@ from typing import Any
 
 
 class SimpleLogger:
+    """
+    Dummy logger that just wraps logging Logger
+    """
 
     def __init__(self, logger: Logger) -> None:
         self._logger = logger

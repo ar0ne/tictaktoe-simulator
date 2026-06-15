@@ -1,12 +1,11 @@
 from typing import Type, Sequence
 
+from game.application.ports.engine import IGameEngine
 from game.application.ports.game_display import IGameDisplay
 from game.application.ports.logger import ILogger
 from game.application.ports.player_connector import IPlayerConnector
-from game.application.ports.engine import IGameEngine
 from game.application.usecases.tictactoe_game_engine import TicTacToeGameEngine
 from game.domain.entities import GameType, Player
-
 
 
 class GameSimulator:
@@ -41,7 +40,7 @@ class GameSimulator:
         return game(randomized_players)
 
     def _init_game(self) -> None:
-        self._logger.info("Init the display %s", self._game_engine.game_type.name)
+        self._logger.info("Initialize game: %s", self._game_engine.game_type.name)
         self._game_engine.start()
 
     def _simulate_game(self) -> None:
