@@ -2,7 +2,7 @@ from typing import Sequence
 
 from mypy.semanal_shared import Protocol
 
-from game.models import PlayerMove, Player, GameType
+from game.domain.entities import PlayerMove, Player, GameType
 
 
 class IGameEngine(Protocol):

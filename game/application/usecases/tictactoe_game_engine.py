@@ -1,16 +1,12 @@
-import logging
-import random
 from typing import Literal, Sequence, cast
 
-from game.models import Player, PlayerMove, GameType
-from game.utils import all_present_and_equal, all_present
+from game.domain.entities import Player, PlayerMove, GameType
+from game.utils.common import all_present_and_equal, all_present
 
 type PlayerValue = Literal["x", "o"]
 
-logger = logging.getLogger(__name__)
 
-
-class TicTacToe:
+class TicTacToeGameEngine:
     CROSS: PlayerValue = "x"
     ZERO: PlayerValue = "o"
 
@@ -18,7 +14,7 @@ class TicTacToe:
 
     def __init__(self, players: Sequence[Player]) -> None:
         if len(players) != 2:
-            raise ValueError("Should be 2 players to play the game!")
+            raise ValueError("Should be 2 players to play the display!")
         self.board: list[PlayerValue | None] = []
         self.cross_player = players[0]
         self.zero_player = players[1]
@@ -42,14 +38,13 @@ class TicTacToe:
 
     def start(self) -> None:
         """
-        Init new game round.
+        Init new display round.
         """
-        logger.debug("Initialize TicTacToe game engine")
         self.board = [None for _ in range(9)]
-        self.current_player = random.choice((self.cross_player, self.zero_player))
+        self.current_player = self.cross_player
 
     def validate_move(self, move: PlayerMove) -> bool:
-        """Validates if game turn is allowed"""
+        """Validates if display turn is allowed"""
         if move is None or move.player is None or move.data is None:
             return False
         if move.player is not self.active_player:
@@ -64,8 +59,7 @@ class TicTacToe:
         return True
 
     def apply_move(self, move: PlayerMove) -> None:
-        """Applies game move"""
-        logger.debug("Applying game move %s", move)
+        """Applies display move"""
         cell_idx: int = cast(int, move.data)
         self.board[cell_idx] = self.CROSS if self.cross_player == move.player else self.ZERO
         self._toggle_active_player()

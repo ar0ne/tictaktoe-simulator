@@ -2,11 +2,12 @@ import argparse
 import logging
 import sys
 
-from game.connector import RemotePlayerConnector, LocalRandomPlayerConnector
-from game.display import TerminalTicTacToeGameDisplay
-from game.models import Player, GameType
-from game.simulator import GameSimulator
-from game.utils import is_valid_url
+from game.application.usecases.tictactoe_game_display import TerminalTicTacToeGameDisplay
+from game.domain.entities import Player, GameType
+from game.application.usecases.game_simulator import GameSimulator
+from game.infrastructure.adapters.local_connector import LocalRandomPlayerConnector
+from game.infrastructure.adapters.remote_connector import RemotePlayerConnector
+from game.utils.common import is_valid_url
 
 logging.basicConfig(
     level=logging.INFO,
@@ -22,7 +23,7 @@ logger = logging.getLogger(__name__)
 def create_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="Game Simulation",
-        description="Simulator of automated game rounds for TicTacToe",
+        description="Simulator of automated display rounds for TicTacToe",
     )
     parser.add_argument("player1", type=str, help="Name of Player 1")
     parser.add_argument("player2", type=str, help="Name of Player 2")
@@ -59,12 +60,12 @@ def main(argv: list[str] | None = None) -> None:
         connector = LocalRandomPlayerConnector()
 
     game_type = GameType.TICTACTOE
-    game_display = TerminalTicTacToeGameDisplay()
+    game_display = TerminalTicTacToeGameDisplay(logger)
 
     players = [Player(args.player1), Player(args.player2)]
     simulator = GameSimulator(connector=connector, game_type=game_type, players=players)
     simulator.run_simulation()
-    game_display.display(simulator.game)
+    game_display.display(simulator.game_engine)
 
 
 if __name__ == "__main__":

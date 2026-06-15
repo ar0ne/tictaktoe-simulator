@@ -1,27 +1,11 @@
 import logging
-import random
-from typing import Protocol
 
 import httpx
 
-from game.engine import IGameEngine
-from game.models import PlayerMove, GameType
+from game.application.ports.engine import IGameEngine
+from game.domain.entities import PlayerMove
 
 logger = logging.getLogger(__name__)
-
-
-class IPlayerConnector(Protocol):
-
-    def get_next_move(self, game: IGameEngine) -> PlayerMove | None:
-        ...
-
-
-class LocalRandomPlayerConnector:
-    def get_next_move(self, game: IGameEngine) -> PlayerMove | None:
-        # here we could get valid moves to chose from
-        if game.game_type == GameType.TICTACTOE:
-            return PlayerMove(game.active_player, random.choice(range(9)))
-        raise ValueError(f"Unsupported game type: {game.game_type}")
 
 
 class RemotePlayerConnector:
