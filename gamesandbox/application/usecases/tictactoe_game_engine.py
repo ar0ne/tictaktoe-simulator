@@ -10,6 +10,17 @@ class TicTacToeGameEngine:
     CROSS: PlayerValue = "x"
     ZERO: PlayerValue = "o"
 
+    WIN_INDEXES = (
+        (0, 1, 2),
+        (3, 4, 5),
+        (6, 7, 8),
+        (0, 4, 8),
+        (2, 4, 6),
+        (0, 3, 6),
+        (1, 4, 7),
+        (2, 5, 8),
+    )
+
     _current_player: Player
 
     def __init__(self, players: Sequence[Player]) -> None:
@@ -18,36 +29,18 @@ class TicTacToeGameEngine:
         self._board: list[PlayerValue | None] = []
         self._cross_player, self._zero_player = players
 
-    def is_player_won(self, val: PlayerValue) -> bool:
+    def is_player_won(self, value: PlayerValue) -> bool:
         """
-        Checks if all values are equal on any of lines.
+        Checks if all values are equal on any of win lines.
         """
+
+        def get_line_values(indexes: Sequence[int]) -> list[PlayerValue | None]:
+            return [self._board[idx] for idx in indexes]
+
         return any(
             (
-                all_present_and_equal(
-                    (self._board[0], self._board[1], self._board[2]), val
-                ),
-                all_present_and_equal(
-                    (self._board[3], self._board[4], self._board[5]), val
-                ),
-                all_present_and_equal(
-                    (self._board[6], self._board[7], self._board[8]), val
-                ),
-                all_present_and_equal(
-                    (self._board[0], self._board[4], self._board[8]), val
-                ),
-                all_present_and_equal(
-                    (self._board[2], self._board[4], self._board[6]), val
-                ),
-                all_present_and_equal(
-                    (self._board[0], self._board[3], self._board[6]), val
-                ),
-                all_present_and_equal(
-                    (self._board[1], self._board[4], self._board[7]), val
-                ),
-                all_present_and_equal(
-                    (self._board[2], self._board[5], self._board[8]), val
-                ),
+                all_present_and_equal(get_line_values(line_idx), value)
+                for line_idx in self.WIN_INDEXES
             )
         )
 
