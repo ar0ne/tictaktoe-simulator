@@ -8,35 +8,29 @@ from game.domain.entities import Player, GameType, SimulationMode
 from game.infrastructure.adapters.local_connector import LocalRandomPlayerConnector
 from game.infrastructure.adapters.logger import create_logger
 from game.infrastructure.adapters.remote_connector import RemotePlayerConnector
-from game.utils.common import is_valid_url
+from game.infrastructure.domain.config import Config
 
 
 class Container:
 
-    def __init__(self, config: dict) -> None:
+    def __init__(self, config: Config) -> None:
         self._config = config
 
     def players(self) -> list[Player]:
-        p1 = Player(self._config['player1'])
-        p2 = Player(self._config['player2'])
+        p1 = Player(self._config.player1)
+        p2 = Player(self._config.player2)
         return list({p1, p2})
 
     def player_connector(self) -> IPlayerConnector:
-        if mode := self._config["mode"]:
-            if mode == SimulationMode.REMOTE.value:
-                if url := self._config["remote_url"]:
-                    if not is_valid_url(url):
-                        raise ValueError("remote_url is not valid URL")
-                return RemotePlayerConnector(url)
-            elif mode == SimulationMode.LOCAL.value:
-                return LocalRandomPlayerConnector()
-        raise ValueError("Mode is not valid")
+        if self._config.mode == SimulationMode.REMOTE and self._config.remote_url:
+            return RemotePlayerConnector(self._config.remote_url)
+        return LocalRandomPlayerConnector()
 
     def game_type(self) -> GameType:
         return GameType.TICTACTOE
 
     def logger(self) -> ILogger:
-        return create_logger(self._config["log_level"])
+        return create_logger(self._config.log_level)
 
     def game_simulator(self) -> IGameSimulator:
         return GameSimulator(connector=self.player_connector(),

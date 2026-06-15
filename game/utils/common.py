@@ -23,7 +23,9 @@ def all_present_and_equal(col: Sequence[Any], value: Any) -> bool:
     return all_present(col) and all_equal(col, value)
 
 
-def is_valid_url(url: str) -> bool:
+def is_valid_url(url: str | None) -> bool:
+    if not url:
+        return False
     try:
         result = urlparse(url)
         # Ensure it has a scheme (http/https/ftp) and a domain name

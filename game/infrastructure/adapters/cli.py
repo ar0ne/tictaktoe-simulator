@@ -11,7 +11,7 @@ def create_parser() -> argparse.ArgumentParser:
     parser.add_argument("-m", "--mode", help="Player simulation mode. Default: 'local'",
                         choices=["remote", "local"], default="local")
     parser.add_argument("-l", "--log-level", help="Logging level. Default: 'info'",
-                        choices=["debug", "info", "warn", "error"], default="info")
+                        choices=["debug", "info", "warning", "error"], default="info")
     parser.add_argument("-r", "--remote-url", help="Uri for remote host simulation mode",
                         type=str, required=False)
     return parser
