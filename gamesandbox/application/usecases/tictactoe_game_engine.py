@@ -62,7 +62,7 @@ class TicTacToeGameEngine:
         if not isinstance(move.data, int):
             return False
         cell_idx: int = move.data
-        if 0 < cell_idx > 8:
+        if not 0 <= cell_idx <= 8:
             return False
         if self._board[cell_idx] is not None:
             return False
