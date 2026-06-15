@@ -23,6 +23,7 @@ def players(bob, alice):
 def tictactoe_draft(players):
     return TicTacToeGameEngine(players)
 
+
 @pytest.fixture()
 def tictactoe(tictactoe_draft):
     tictactoe_draft.start()

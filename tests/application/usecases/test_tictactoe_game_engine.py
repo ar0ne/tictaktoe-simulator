@@ -61,87 +61,98 @@ def test_active_player(tictactoe, bob):
 @pytest.mark.parametrize(
     "board, value, expected",
     (
+        (
             (
-                    (
-                            ("x", None, None),
-                            ("o", "o", "o"),
-                            ("x", None, None),
-                    ),
-                    "x", False
+                ("x", None, None),
+                ("o", "o", "o"),
+                ("x", None, None),
             ),
+            "x",
+            False,
+        ),
+        (
             (
-                    (
-                            ("x", "x", "x"),
-                            ("o", None, None),
-                            ("x", None, None),
-                    ),
-                    "x", True
+                ("x", "x", "x"),
+                ("o", None, None),
+                ("x", None, None),
             ),
+            "x",
+            True,
+        ),
+        (
             (
-                    (
-                            ("x", "o", "x"),
-                            ("x", "x", "x"),
-                            (None, None, None),
-                    ),
-                    "x", True
+                ("x", "o", "x"),
+                ("x", "x", "x"),
+                (None, None, None),
             ),
+            "x",
+            True,
+        ),
+        (
             (
-                    (
-                            ("x", "o", "x"),
-                            (None, None, None),
-                            ("x", "x", "x"),
-                    ),
-                    "x", True
+                ("x", "o", "x"),
+                (None, None, None),
+                ("x", "x", "x"),
             ),
+            "x",
+            True,
+        ),
+        (
             (
-                    (
-                            ("x", "o", "x"),
-                            ("x", None, None),
-                            ("x", None, None),
-                    ),
-                    "x", True
+                ("x", "o", "x"),
+                ("x", None, None),
+                ("x", None, None),
             ),
+            "x",
+            True,
+        ),
+        (
             (
-                    (
-                            ("x", "o", "x"),
-                            (None, "o", None),
-                            ("x", "o", "x"),
-                    ),
-                    "o", True
+                ("x", "o", "x"),
+                (None, "o", None),
+                ("x", "o", "x"),
             ),
+            "o",
+            True,
+        ),
+        (
             (
-                    (
-                            ("x", "o", "o"),
-                            (None, "o", "o"),
-                            ("x", "x", "o"),
-                    ),
-                    "o", True
+                ("x", "o", "o"),
+                (None, "o", "o"),
+                ("x", "x", "o"),
             ),
+            "o",
+            True,
+        ),
+        (
             (
-                    (
-                            ("x", "o", "o"),
-                            (None, "x", "o"),
-                            (None, "o", "x"),
-                    ),
-                    "x", True
+                ("x", "o", "o"),
+                (None, "x", "o"),
+                (None, "o", "x"),
             ),
+            "x",
+            True,
+        ),
+        (
             (
-                    (
-                            ("x", None, "o"),
-                            (None, "o", None),
-                            ("o", "x", "x"),
-                    ),
-                    "o", True
+                ("x", None, "o"),
+                (None, "o", None),
+                ("o", "x", "x"),
             ),
+            "o",
+            True,
+        ),
+        (
             (
-                    (
-                            ("x", None, "o"),
-                            (None, "o", None),
-                            ("o", "x", "x"),
-                    ),
-                    "x", False
+                ("x", None, "o"),
+                (None, "o", None),
+                ("o", "x", "x"),
             ),
-    ))
+            "x",
+            False,
+        ),
+    ),
+)
 def test_is_player_won(tictactoe, board, value, expected):
     tictactoe._board = flatten(board)
     print(tictactoe._board)
