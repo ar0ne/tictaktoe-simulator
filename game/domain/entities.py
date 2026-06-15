@@ -4,7 +4,7 @@ from typing import Any
 
 
 class GameType(enum.Enum):
-    TICTACTOE = enum.auto()
+    TICTACTOE = "tictactoe"
 
 
 class SimulationMode(enum.Enum):

@@ -7,5 +7,6 @@ class IGameDisplay(Protocol):
     """
     Interface of game state display
     """
-    def display(self, game: IGameEngine) -> None:
+
+    def display(self, game_engine: IGameEngine) -> str:
         ...

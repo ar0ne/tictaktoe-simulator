@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from game.domain.entities import SimulationMode
+from game.domain.entities import SimulationMode, GameType
 from game.infrastructure.domain.log import LogLevel
 from game.utils.common import is_valid_url
 
@@ -10,6 +10,7 @@ class Config:
     player1: str
     player2: str
     mode: SimulationMode
+    game_type: GameType
     log_level: LogLevel
     remote_url: str | None = None
 
